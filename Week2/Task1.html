@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function findAndPrint(messages){
+
+            for (let name in messages) {
+            let message = messages[name];
+
+//如果對話字串出現關鍵字就印出人名
+                if (message.includes("18 years old")|| 
+                    message.includes("college student")||
+                    message.includes("legal age")||
+                    message.includes("vote"))
+//排除否定詞句
+                        if (!message.includes("not")||
+                            !message.includes("under")){
+                            console.log(name);
+                            }
+            }
+        }
+    
+        findAndPrint({
+        "Bob":"My name is Bob. I'm 18 years old.",
+        "Mary":"Hello, glad to meet you.",
+        "Copper":"I'm a college student. Nice to meet you.",
+        "Leslie":"I am of legal age in Taiwan.",
+        "Vivian":"I will vote for Donald Trump next week",
+        "Jenny":"Good morning."
+        });
+
+    </script>
+    
+</body>
+</html>
