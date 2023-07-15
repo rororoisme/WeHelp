@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function func(...data){
+            let len = data.length
+            let uni_rec = 0
+
+//留意變數位置與關係        
+            for (let i=0; i<len; i++) {
+                let current_string = data[i]
+                let second_char = current_string[1]
+                let is_unique = true
+                
+                for (let j=0; j<len; j++) {            
+                    if ( i != j && second_char == data[j][1] ) {
+                        is_unique = false
+                        break                    
+                    }
+                }
+
+                if (is_unique) {
+                    console.log(current_string)
+                    uni_rec = uni_rec + 1
+                }
+            }
+
+            if (uni_rec == 0){
+            console.log("沒有")
+            }
+            
+        }
+
+
+        func("彭⼤牆", "王明雅", "吳明"); // print 彭⼤牆
+        func("郭靜雅", "王立強", "林靜宜", "郭立恆", "林花花"); // print 林花花
+        func("郭宣雅", "林靜宜", "郭宣恆", "林靜花"); // print 沒有
+    </script>
+</body>
+</html>

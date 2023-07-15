@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+function getNumber(index){
+    let q = index /2              // 0  0.5  1  1.5  2
+    let r = index %2              // 0   1   0   1   0
+//q 是順序 以0.5為間隔  0.5 1.5 2.5 3.5 -> 1 2 3 4
+//r 是判斷它是否為偶數 0為第0個 偶數開始
+    if (r==0) {
+        console.log(3 *q)
+    }
+
+    else {
+        console.log((q+0.5) *3+1)    
+    }
+
+}
+
+getNumber(1); // print 4
+getNumber(5); // print 10
+getNumber(10); // print 15
+
+
+
+    </script>
+</body>
+</html>

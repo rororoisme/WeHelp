@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    function calculateSumOfBonus(data) {
+        let totalBonus = 0;
+
+//定義bonus基準級距        
+        const performanceRules = {
+        "above average": 0.1,
+        "average": 0.05,
+        "below average": 0.02
+        };
+      
+        const roleRules = {
+        "Engineer": 0.03,
+        "CEO": 0.05,
+        "Sales": 0.01
+        };
+
+//比對所有input的個別物件      
+        data.employees.forEach((element) => {
+        let oldSalary;
+        
+//以正則式處理salary欄位(保留數字及小數點,其他替換空字串)
+        let y = parseFloat(String(element.salary).replace(/[^0-9.-]+/g,""));
+
+//若有外幣單位則乘以該幣值       
+        if (String(element.salary).includes("USD")) {
+            oldSalary = y * 30;
+        } else {
+            oldSalary = y;
+        }
+           
+        totalBonus =
+//本薪*表現 + 本薪*職等 = 獎金
+        totalBonus +
+        oldSalary * performanceRules[element.performance] +
+        oldSalary * roleRules[element.role] ;
+        });
+
+//設定獎金上限,超過則按照比例調降
+        const max = 10000;
+
+        if (totalBonus > max) {
+        const ratio = max / totalBonus; // 比例
+        totalBonus = totalBonus * ratio;
+        }
+
+        return totalBonus;
+    }
+      
+        console.log(calculateSumOfBonus({
+
+//每個大括號都是代表員工資料的物件
+            employees: [
+
+            {name: "John",
+            salary: "1000USD",
+            performance: "above average",
+            role: "Engineer",
+            },
+
+            {name: "Bob", 
+            salary: 60000, 
+            performance: "average", 
+            role: "CEO" },
+
+            {name: "Jenny",
+            salary: "50,000",
+            performance: "below average",
+            role: "Sales",
+            },
+
+            ],
+        })
+        );
+    </script>
+</body>
+</html>
