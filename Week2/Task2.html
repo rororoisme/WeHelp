@@ -10,7 +10,8 @@
 
     function calculateSumOfBonus(data) {
         let totalBonus = 0;
-
+        let oldTotalBonus = 0;
+        let individualBonuses = {};
 //定義bonus基準級距        
         const performanceRules = {
         "above average": 0.1,
@@ -38,24 +39,36 @@
             oldSalary = y;
         }
            
-        totalBonus =
-//本薪*表現 + 本薪*職等 = 獎金
-        totalBonus +
+
+//個人獎金 : 本薪*表現 + 本薪*職等
+        let bonus =
         oldSalary * performanceRules[element.performance] +
-        oldSalary * roleRules[element.role] ;
+        oldSalary * roleRules[element.role];
+
+//儲存個人獎金
+        individualBonuses[element.name] = bonus;
+
+//計算總獎金        
+        oldTotalBonus += individualBonuses[element.name];
         });
 
-//設定獎金上限,超過則按照比例調降
+//總獎金若超過某數, 按比例調整獎金
         const max = 10000;
+        if (oldTotalBonus > max) {
+            const ratio = max  / oldTotalBonus;
+            oldTotalBonus *= ratio;
+        
 
-        if (totalBonus > max) {
-        const ratio = max / totalBonus; // 比例
-        totalBonus = totalBonus * ratio;
+//同時調整員工獎金金額並印出
+            for (const name in individualBonuses) {
+                individualBonuses[name] = Math.floor(individualBonuses[name]*ratio);
+                console.log(name + individualBonuses[name])
+                totalBonus += individualBonuses[name];
+            }
         }
-
         return totalBonus;
     }
-      
+
         console.log(calculateSumOfBonus({
 
 //每個大括號都是代表員工資料的物件

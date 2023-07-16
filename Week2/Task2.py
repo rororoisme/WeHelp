@@ -1,7 +1,9 @@
 def calculate_sum_of_bonus(data):
     total_bonus = 0
+    old_total_bonus = 0
+    individual_bonuses = {}
 
-#定義bonus基準級距    
+#定義bonus基準級距   
     performance_rules = {
         "above average": 0.1,
         "average": 0.05,
@@ -30,18 +32,27 @@ def calculate_sum_of_bonus(data):
         else:
             old_salary = float(salary)
 
-#本薪*表現 + 本薪*職等 = 獎金
-        total_bonus += old_salary * performance_rules[element["performance"]] + \
-                       old_salary * role_rules[element["role"]]
+#個人獎金 : 本薪*表現 + 本薪*職等
+        bonus = old_salary * performance_rules[element["performance"]] + \
+        old_salary * role_rules[element["role"]]
 
+#儲存個人獎金
+        individual_bonuses[element["name"]] = bonus
 
-#設定獎金上限,超過則按照比例調降
+#計算總獎金
+        old_total_bonus += individual_bonuses[element["name"]]
+
+#總獎金若超過某數, 按比例調整獎金
     max_bonus = 10000
+    if old_total_bonus > max_bonus:
+        ratio = max_bonus / old_total_bonus
+        old_total_bonus *= ratio
     
-
-    if total_bonus > max_bonus:
-        ratio = max_bonus / total_bonus  # 比例
-        total_bonus *= ratio
+#同時調整員工獎金金額並印出
+    for name in individual_bonuses:
+        individual_bonuses[name] = int(individual_bonuses[name] * ratio)
+        print(name , individual_bonuses[name])
+        total_bonus += individual_bonuses[name]
 
     print(int(total_bonus))
 
