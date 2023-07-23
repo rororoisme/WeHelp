@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>week1 RWD</title>
+  <link rel="stylesheet" type="text/css" href="rwd.css">
+</head>
+  
+<body>
+    
+  <div class="headline">
+    <div class="left-align">My Website</div>
+    <div class="right-align">Item1　Item2　Item3　Item4</div>
+    <div class="hamburger"><img src="https://cdn4.iconfinder.com/data/icons/wirecons-free-vector-icons/32/menu-alt-256.png"></div>
+  </div>
+  <div class="title">Welcome to MyHome</div>
+  <div id="attractions" class="container">
+    
+    <!--Week1的html結構-->
+    <!-- <div class="promotion promotion-1"><img class="bigpic" src="mountain.jpg">promotion1</div>
+    <div class="product"><img class="littlepic" src="mountain.jpg">title6</div> -->
+
+<script>
+        // 使用fetch獲取JSON資料
+        fetch('https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json')
+            .then(response => response.json())
+            .then(data => {
+                // 取得JSON資料後處理建立畫面
+                const attractionsContainer = document.getElementById('attractions');
+                const results = data.result.results;
+
+                // 迴圈建立各個景點的畫面元素
+                for (let i = 0; i < results.length; i++) {
+                    const attraction = results[i];
+
+                    // 創建一個新的<div>表示單一景點
+                    const attractionElement = document.createElement('div');
+                    // 在前三個景點的 <div> 元素中做其他操作
+                    if (i < 3) {
+                        attractionElement.classList.add('promotion');
+                        if (i == 0) {
+                            attractionElement.classList.add('promotion-1');
+                        }
+                        if (i == 1) {
+                            attractionElement.classList.add('promotion-2');
+                        }
+                        if (i == 2) {
+                            attractionElement.classList.add('promotion-3');
+                        }
+                    }
+                    else if(i < 15) {             
+					    attractionElement.classList.add('product');
+                    }
+
+                    attractionElement.classList.add('attraction');
+
+                    // 創建一個<h2>表示景點標題
+                    const titleElement = document.createElement('h2');
+                    titleElement.textContent = attraction.stitle;
+
+                    // 提取第一個圖片網址
+                    const imageSrc = extractFirstImageUrl(attraction.file);
+
+
+                    // 如果函式提取成功, 創建一個<img>來表示景點圖片
+                    if (imageSrc) {
+                        const imageElement = document.createElement('img');
+                        if (i < 3){
+                            imageElement.classList.add('bigpic');
+                        }
+                        else if (i < 15){
+						    imageElement.classList.add('littlepic');
+                        }
+                        imageElement.src = imageSrc;
+                        attractionElement.appendChild(imageElement);
+                    }
+                    // 把<h2>跟<img>加到<div>之中
+                    attractionElement.appendChild(titleElement);
+                    // 把裝有每個景點的<div>加入到主容器, 顯示在網頁上
+                    attractionsContainer.appendChild(attractionElement);
+                    //
+                    if (i == 14) {
+                        break
+                    }
+                };
+
+            }) 
+            
+            // 提取第一個圖片網址的函式
+            function extractFirstImageUrl(file) {
+                const pattern = /http.*?\.jpg|http.*?\.JPG/i; // 使用正規表達式找出以http開頭且.jpg或.JPG結尾的網址，不區分大小寫
+                const match = file.match(pattern);
+                return match ;
+            }
+
+    </script>
+
+
+  </div>  
+</body>
+</html>
