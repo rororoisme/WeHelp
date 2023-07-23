@@ -72,13 +72,18 @@
 .product {
   display: flex;
   flex-direction: column;
-  /*align-items: center;*/
+  align-items: center;
   /*justify-content: center;*/
   vertical-align: top;
   /* 將寬度平均分6塊再扣除5個20px的間距 16px = 5*20px / 6 */
   width:calc(16.6% - 16px);
-  /*height: 250px;*/
   background-color: #ffcccc;
+}
+
+
+.product h2 {
+ margin:auto 0;
+ padding: 0 5px;
 }
 
 .littlepic{
@@ -86,6 +91,7 @@
   height: 200px;
   object-fit:cover;
 }
+
 
 /* 平板裝置設計 */
 @media (max-width: 1200px) {
@@ -107,8 +113,8 @@
   }
 
   .littlepic{
-    max-width: 100%;
-    height: auto;
+    max-width: auto;
+    height: 200px;
   }
 }
 
