@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+html,body{
+    height: 100%;
+}
+
+body{
+    background-image: url(https://plus.unsplash.com/premium_photo-1690489323667-ea52e341b184?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1906&q=80);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    width: 400px;
+}
+
+.box_top{
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-weight: normal;
+    padding: 20px 0;
+    margin: 0;
+    width: 100%;
+}
+
+.signin_box {
+    text-align: center;
+    width: 100%;
+    line-height: 1.8;
+    padding: 10px 0px 20px;
+}
+
+.message {
+  width: 400px;
+  text-align: center;
+  height: 100px;
+}
+
+.message h3 {
+  text-align: center;
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 0 px;
+  padding-left: 30px;
+}
+
+a {
+  size: 120%;
+}
+
+.form{
+    width: 400px;
+}

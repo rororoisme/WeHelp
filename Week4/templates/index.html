@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week4</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="login">
+        <form class="form" action="/signin" method="POST">
+            <div class="box_top">
+                <h2>歡迎光臨，請輸入帳號密碼</h2>
+            </div>
+                <div class="signin_box">
+                <h3>登入系統</h3>
+                <div class="id_box">
+                    <label for="user_id">帳號</label>
+                    <input type="text" name="userid" id="user_id">
+                </div>
+                <div class="password_box">
+                    <label for="user_password">密碼</label>
+                    <input type="password" name="password" id="user_password">
+                </div>
+                <div class="agree_group">
+                    <label for="agree_check">同意條款</label>
+                    <input type="checkbox" id="agree_check">
+                </div>
+                <div class="botton_group">
+                    <button class="button" onclick="return checkAgreement()">登入</button>
+                </div>
+                </div>
+        </form>
+    </div>
+    <script>
+        // JavaScript 函式, 檢查是否勾選同意條款後再登入
+        function checkAgreement() {
+            var agreeCheckbox = document.getElementById("agree_check");
+            if (!agreeCheckbox.checked) {
+                alert("Please check the checkbox first");
+                return false; // 阻止表單提交
+            }
+            return true; // 允許表單提交
+        }
+    </script>
+</body>
+</html>

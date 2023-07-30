@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <script>
+        // JavaScript 函式, 檢查是否勾選同意條款後再登入
+        function checkAgreement() {
+            var agreeCheckbox = document.getElementById("agree_check");
+            if (!agreeCheckbox.checked) {
+                alert("Please check the checkbox first");
+                return false; // 阻止表單提交
+            }
+            return true; // 允許表單提交
+        }
+    </script>
+    <div class="login">
+        <form class="form">
+            <div class="box_top">
+                <h2>失敗頁面</h2>
+            </div>
+                <div class="message">
+                <h3>{{message}}</h3>
+                </div>
+        </form>
+    </div>
+    
+</body>
+</html>
