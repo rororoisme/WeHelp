@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week4</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="login">
+        <form class="form" action="signup" method="POST" onsubmit="return signupCheck()">
+            <div class="box_top">
+                <h2>歡迎光臨，請註冊登入系統</h2>
+            </div>
+          <div class="signin_box">
+            <h3>註冊帳號</h3>
+            <div class="id_name">
+              <label for="user_name">姓名</label>
+              <input type="text" name="name" id="user_name1">
+            </div>
+            <div class="id_box">
+              <label for="user_id">帳號</label>
+              <input type="text" name="account" id="user_account1">
+            </div>
+            <div class="password_box">
+              <label for="user_password">密碼</label>
+              <input type="password" name="password" id="user_password1">
+          </div>
+               <div class="botton_group">
+               <button class="button" type="submit">註冊</button>
+                </div>
+        </form>
+            <hr/>
+            <form class="form" action="/signin" method="POST" onsubmit="return signinCheck()">
+                <div class="signin_box">
+                    <h3>登入系統</h3>
+                    <div class="id_box">
+                        <label for="user_id">帳號</label>
+                        <input type="text" name="account" id="user_account2">
+                    </div>
+                    <div class="password_box">
+                        <label for="user_password">密碼</label>
+                        <input type="password" name="password" id="user_password2">
+                    </div>
+                    <div class="botton_group">
+                        <button class="button" onclick="return checkAgreement()">登入</button>
+                    </div>
+                  
+                </div>
+        </form>
+    </div>
+    <script>
+        // 檢查點選註冊按鈕前, 是否有未輸入的資訊
+        function signupCheck() {
+            let nameInput = document.getElementById('user_name1');
+            let accountInput = document.getElementById('user_account1');
+            let passwordInput = document.getElementById('user_password1');
+            if (nameInput.value === '' || accountInput.value === ''|| passwordInput.value ==='') {
+                alert("請輸入完整資訊");
+                return false;
+            }
+            return true;
+        }
+        
+        function signinCheck() {
+            let accountInput = document.getElementById('user_account2');
+            let passwordInput = document.getElementById('user_password2');
+            if (accountInput.value === '' || passwordInput.value === ''){
+                alert("請輸入帳號密碼");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
