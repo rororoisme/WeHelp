@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="login">
+        <form class="form">
+            <div class="box_top"><h2>歡迎光臨，這是會員頁</h2></div>
+            <div class="message"><h3 id="name">{{name}}，歡迎登入系統</h3>
+              <a href=/signout>登出系統</a></div>
+        </form>
+        <hr/>
+        <!--<div class="message">
+            <form class="form" action="createMessage" method="POST">
+                <h3>快來留言吧</h3>
+                <label for="user_content">內容</label>
+                <input type="text" name="usercontent" id="user_content">
+                <div class="botton_group">
+                    <button>送出</button>
+                </div>
+            </form>
+        </div>
+        <hr/>
+        <div class="message">
+            {% for message in messages %}
+            <div id="titleText">
+                {{message.memberName}}:{{message.content}}
+            </div>
+            {% endfor %}
+        </div>
+      <hr/>-->
+        <div class="feature">
+            <h3>查詢會員姓名</h3>
+            <input type="text" id="accountForSearching" placeholder="輸入會員帳號">
+                <button onclick="checkAccount()">查詢</button>
+                <h3 id="queryResult"></h3>
+        </div>
+        <hr/>
+        <div class="feature">
+            <h3>更新我的姓名</h3>
+            <input type="text" id="newName" placeholder="輸入新的姓名">
+                <button onclick="updateName()">更新</button>
+                <h3 id="updateResult"></h3>
+        </div>
+
+    </div>
+
+    <script>
+        // 查詢會員資料
+        function checkAccount() {
+            console.log("checkAccount is clicked.")
+            // 清空查詢結果區域
+            document.getElementById("queryResult").innerHTML = "";
+            // 獲取輸入的會員名稱
+            let accountForSearching = document.getElementById("accountForSearching").value;
+
+            // 使用 fetch 函數發送 GET 請求到指定 API
+            fetch(`/api/member?username=${accountForSearching}`)
+            // 將回應轉換為 JSON 格式
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                let queryResultInFunction = document.getElementById("queryResult");
+                if (data.data) {
+                    // 如果找到會員資料，更新查詢結果區域
+                    let memberData = data.data; // [id, "name", "username"]
+                    queryResultInFunction.innerHTML = `查詢結果：${memberData[1]} (${memberData[2]})`;
+                } else {
+                    queryResultInFunction.innerHTML = "查無此會員資料";
+                }
+            })
+            .catch(function(error) {
+                console.error("Error:", error);
+                document.getElementById("queryResult").innerHTML = "發生錯誤";
+            });
+        }   
+
+        // 更新會員名稱
+        function updateName() {
+            console.log("updateName is clicked.")
+            // 獲取新名稱
+            let newName = document.getElementById("newName").value;
+            // 使用 fetch 函數發送 PATCH 請求到指定 API
+            fetch("/api/member", 
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    // JSON只能傳遞純文字
+                    body: JSON.stringify({ name: newName }), 
+                }
+            )
+            .then( function(response) {
+                return response.json()
+            })
+            .then(function(data) {
+                let updateResult = document.getElementById("updateResult");
+                if (data.ok == true) {
+                    updateResult.innerHTML = "更新成功";
+                    document.getElementById("name").innerHTML = newName + "，歡迎登入系統";
+                } else {
+                    updateResult.innerHTML = "更新失敗";
+                }
+               
+            })
+            .catch(function(error) {
+                console.error("Error:", error);
+                document.getElementById("updateResult").innerHTML = "發生錯誤";
+            });
+        }
+    </script>
+</body>
+</html>

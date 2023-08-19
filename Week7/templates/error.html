@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="login">
+        <form class="form">
+            <div class="box_top">
+                <h2>失敗頁面</h2>
+            </div>
+            <div class="signin_box">
+                <h3>{{message}}</h3>
+            
+            <form action="signout" method="GET">
+                <div class="button" id="titleText"><button><a href="/">登出</a></button></div>
+            </form>
+        </form>
+          </div>
+    </div>
+    
+</body>
+</html>
